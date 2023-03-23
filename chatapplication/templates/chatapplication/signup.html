@@ -1,0 +1,40 @@
+{% extends 'chatapplication/base.html' %}
+
+{% block title %}Sign up | {% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-body">
+        <h1 class="title has-text-centered has-text-white">Sign up</h1>
+    </div>
+</div>
+
+<section class="section has-text-white">
+    <div class="columns">
+        <div class="column is-4 is-offset-4">
+            <form method="post" action=".">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <p>
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: rgb(206, 153, 153)">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p style="color: rgb(204, 154, 154)">{{ error }}</p>
+                {% endfor %}
+                </p>
+            {% endfor %}
+
+                <div class="field">
+                    <div class="control">
+                        <button class="button">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
